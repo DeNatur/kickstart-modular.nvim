@@ -1,8 +1,7 @@
 -- [[ Basic Keymaps ]]
 
 -- Keymaps for better default experience
--- See `:help vim.keymap.set()`
-vim.keymap.set({ 'n', 'v' }, '<Space>', '<Nop>', { silent = true })
+-- See `:help vim.keymap.set()` vim.keymap.set({ 'n', 'v' }, '<Space>', '<Nop>', { silent = true })
 
 -- Remap for dealing with word wrap
 vim.keymap.set('n', 'k', "v:count == 0 ? 'gk' : 'k'", { expr = true, silent = true })
@@ -26,3 +25,60 @@ vim.api.nvim_create_autocmd('TextYankPost', {
 })
 
 -- vim: ts=2 sts=2 sw=2 et
+
+vim.keymap.set('n', '<leader>\\', "<cmd>vsplit<cr>", { desc = 'Vertical Split' })
+vim.keymap.set('n', '<leader>-', "<cmd>split<cr>", { desc = 'Horizontal Split' })
+
+vim.keymap.set('n', '<leader>q', "<cmd>confirm q<cr>", { desc = 'Quit' })
+vim.keymap.set('n', '<leader>Q', "<cmd>confirm qall<cr>", { desc = 'Quit All' })
+vim.keymap.set('n', '<leader>w', "<cmd>w<cr>", { desc = 'Save' })
+vim.keymap.set('n', '<leader>wa', "<cmd>wall<cr>", { desc = 'Save all' })
+
+-- neo tree mappings
+vim.keymap.set('n', '<leader>e', "<cmd>Neotree toggle<cr>", { desc = 'Toggle Explorer' })
+
+vim.keymap.set('n', ']t', function()
+  vim.cmd.tabnext()
+end, { desc = 'Toggle Explorer' })
+
+-- harpoon setups
+local harpoon = require("harpoon")
+
+-- REQUIRED
+harpoon:setup({})
+-- REQUIRED
+
+vim.keymap.set("n", "<leader>a", function() harpoon:list():append() end, { desc = "Harpoon Append" })
+vim.keymap.set("n", "<C-e>", function() harpoon.ui:toggle_quick_menu(harpoon:list()) end, { desc = "Harpoon Quick Menu" })
+
+vim.keymap.set("n", "<leader>u", function() harpoon:list():select(1) end, { desc = "Harpoon Select 1" })
+vim.keymap.set("n", "<leader>i", function() harpoon:list():select(2) end, { desc = "Harpoon Select 2" })
+vim.keymap.set("n", "<leader>o", function() harpoon:list():select(3) end, { desc = "Harpoon Select 3" })
+vim.keymap.set("n", "<leader>p", function() harpoon:list():select(4) end, { desc = "Harpoon Select 4" })
+
+-- Toggle previous & next buffers stored within Harpoon list
+vim.keymap.set("n", "<C-p>", function() harpoon:list():prev() end, { desc = "Harpoon Previous" })
+vim.keymap.set("n", "<C-n>", function() harpoon:list():next() end, { desc = "Harpoon Next" })
+
+harpoon:setup({})
+
+-- basic telescope configuration
+-- local conf = require("telescope.config").values
+-- local function toggle_telescope(harpoon_files)
+--   local file_paths = {}
+--   for _, item in ipairs(harpoon_files.items) do
+--     table.insert(file_paths, item.value)
+--   end
+--
+--   require("telescope.pickers").new({}, {
+--     prompt_title = "Harpoon",
+--     finder = require("telescope.finders").new_table({
+--       results = file_paths,
+--     }),
+--     previewer = conf.file_previewer({}),
+--     sorter = conf.generic_sorter({}),
+--   }):find()
+-- end
+--
+-- vim.keymap.set("n", "<C-e>", function() toggle_telescope(harpoon:list()) end,
+--   { desc = "Open harpoon window" })
