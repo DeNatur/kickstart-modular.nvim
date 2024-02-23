@@ -205,7 +205,12 @@ require('lazy').setup({
     'nvim-treesitter/nvim-treesitter',
     dependencies = {
       'nvim-treesitter/nvim-treesitter-textobjects',
+      "vrischmann/tree-sitter-templ",
     },
+    config = function()
+      require("tree-sitter-templ").setup({})
+    end,
+
     build = ':TSUpdate',
   },
 

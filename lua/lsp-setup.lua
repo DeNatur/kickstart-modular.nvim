@@ -1,5 +1,8 @@
 -- [[ Configure LSP ]]
 --  This function gets run when an LSP connects to a particular buffer.
+--
+vim.filetype.add({ extension = { templ = "templ" } })
+
 local on_attach = function(_, bufnr)
   -- NOTE: Remember that lua is a real programming language, and as such it is possible
   -- to define small helper and utility functions so you don't have to repeat yourself
@@ -82,8 +85,12 @@ local servers = {
   -- pyright = {},
   -- rust_analyzer = {},
   -- tsserver = {},
-  -- html = { filetypes = { 'html', 'twig', 'hbs'} },
-
+  html = { filetypes = { 'html', 'templ' } },
+  htmx = { filetypes = { 'html', 'templ' } },
+  tailwindcss = {
+    init_options = { userLanguages = { templ = "html" } },
+    filetypes = { 'html', 'templ', "javascript", "typescript", "react" },
+  },
   lua_ls = {
     Lua = {
       workspace = { checkThirdParty = false },
@@ -115,6 +122,7 @@ mason_lspconfig.setup_handlers {
       on_attach = on_attach,
       settings = servers[server_name],
       filetypes = (servers[server_name] or {}).filetypes,
+      init_options = (servers[server_name] or {}).init_options,
     }
   end,
 }
