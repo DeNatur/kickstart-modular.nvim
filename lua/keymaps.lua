@@ -59,3 +59,5 @@ vim.keymap.set("n", "<leader>p", function() harpoon:list():select(4) end, { desc
 -- Toggle previous & next buffers stored within Harpoon list
 vim.keymap.set("n", "<C-p>", function() harpoon:list():prev() end, { desc = "Harpoon Previous" })
 vim.keymap.set("n", "<C-n>", function() harpoon:list():next() end, { desc = "Harpoon Next" })
+
+vim.keymap.set('n', '<leader>gl', "<cmd>LazyGit<cr>", { desc = 'Open LazyGit' })
