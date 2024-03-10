@@ -12,6 +12,8 @@ vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, { desc = 'Go to previous dia
 vim.keymap.set('n', ']d', vim.diagnostic.goto_next, { desc = 'Go to next diagnostic message' })
 vim.keymap.set('n', '<leader>e', vim.diagnostic.open_float, { desc = 'Open floating diagnostic message' })
 vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Open diagnostics list' })
+vim.keymap.set('n', '<leader>lr', function() vim.lsp.buf.rename() end, { desc = 'Rename' })
+vim.keymap.set('n', '<leader>la', function() vim.lsp.buf.code_action() end, { desc = 'Rename' })
 
 -- [[ Highlight on yank ]]
 -- See `:help vim.highlight.on_yank()`
@@ -41,20 +43,18 @@ vim.keymap.set('n', ']t', function()
   vim.cmd.tabnext()
 end, { desc = 'Toggle Explorer' })
 
--- harpoon setups
+-- Keybinding of harpoon
+
 local harpoon = require("harpoon")
 
--- REQUIRED
-harpoon:setup({})
--- REQUIRED
+vim.keymap.set("n", "<leader>ha", function() harpoon:list():append() end, { desc = "Harpoon Append" })
+vim.keymap.set("n", "<leader>hl", function() harpoon.ui:toggle_quick_menu(harpoon:list()) end,
+  { desc = "Harpoon Quick Menu" })
 
-vim.keymap.set("n", "<leader>a", function() harpoon:list():append() end, { desc = "Harpoon Append" })
-vim.keymap.set("n", "<C-e>", function() harpoon.ui:toggle_quick_menu(harpoon:list()) end, { desc = "Harpoon Quick Menu" })
-
-vim.keymap.set("n", "<leader>u", function() harpoon:list():select(1) end, { desc = "Harpoon Select 1" })
-vim.keymap.set("n", "<leader>i", function() harpoon:list():select(2) end, { desc = "Harpoon Select 2" })
-vim.keymap.set("n", "<leader>o", function() harpoon:list():select(3) end, { desc = "Harpoon Select 3" })
-vim.keymap.set("n", "<leader>p", function() harpoon:list():select(4) end, { desc = "Harpoon Select 4" })
+vim.keymap.set("n", "<leader>hu", function() harpoon:list():select(1) end, { desc = "Harpoon Select 1" })
+vim.keymap.set("n", "<leader>hi", function() harpoon:list():select(2) end, { desc = "Harpoon Select 2" })
+vim.keymap.set("n", "<leader>ho", function() harpoon:list():select(3) end, { desc = "Harpoon Select 3" })
+vim.keymap.set("n", "<leader>hp", function() harpoon:list():select(4) end, { desc = "Harpoon Select 4" })
 
 -- Toggle previous & next buffers stored within Harpoon list
 vim.keymap.set("n", "<C-p>", function() harpoon:list():prev() end, { desc = "Harpoon Previous" })
