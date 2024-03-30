@@ -85,11 +85,18 @@ local servers = {
   -- pyright = {},
   -- rust_analyzer = {},
   -- tsserver = {},
-  html = { filetypes = { 'html', 'templ' } },
-  htmx = { filetypes = { 'html', 'templ' } },
+  -- html = {
+  --   filetypes = { 'html', 'templ' },
+  --   autoformat = false,
+  -- },
+  htmx = {
+    filetypes = { 'html', 'templ' },
+    autoformat = false,
+  },
   tailwindcss = {
     init_options = { userLanguages = { templ = "html" } },
     filetypes = { 'html', 'templ', "javascript", "typescript", "react" },
+    autoformat = false,
   },
   lua_ls = {
     Lua = {
@@ -126,5 +133,6 @@ mason_lspconfig.setup_handlers {
     }
   end,
 }
+local lspconfig = require('lspconfig')
 
 -- vim: ts=2 sts=2 sw=2 et
